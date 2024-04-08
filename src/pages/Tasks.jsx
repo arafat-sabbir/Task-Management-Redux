@@ -1,9 +1,19 @@
 import { BellIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import MyTasks from '../components/tasks/MyTasks';
 import TaskCard from '../components/tasks/TaskCard';
+import { useDispatch, useSelector } from 'react-redux';
+import { decrement, increment, incrementByValue } from '../Redux/Features/Slices/taskSlicec';
 
 const Tasks = () => {
+  const {count} = useSelector((state) => state.taskSlices)
+  const dispatch = useDispatch()
   return (
+   <>
+   <div>
+    <button onClick={()=>dispatch(increment())}>- Dec</button>
+    <h1>{count}</h1>
+    <button onClick={()=>dispatch(incrementByValue(10))}>+ Inc</button>
+   </div>
     <div className="h-screen grid grid-cols-12">
       <div className="col-span-9 px-10 pt-10">
         <div className="flex justify-between items-center">
@@ -107,7 +117,7 @@ const Tasks = () => {
         </div>
         <MyTasks />
       </div>
-    </div>
+    </div></>
   );
 };
 
